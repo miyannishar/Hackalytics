@@ -11,11 +11,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Profile = () => {
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
     phoneNumber: "",
     bloodGroup: "",
     address: "",
-    emergencyContact: "",
     weight: "",
     height: "",
     insuranceCompany: "",
@@ -59,11 +57,9 @@ const Profile = () => {
     try {
       const formDataWithFile = new FormData();
       formDataWithFile.append("fullName", formData.fullName);
-      formDataWithFile.append("email", formData.email);
       formDataWithFile.append("phoneNumber", formData.phoneNumber);
       formDataWithFile.append("bloodGroup", formData.bloodGroup);
       formDataWithFile.append("address", formData.address);
-      formDataWithFile.append("emergencyContact", formData.emergencyContact);
       formDataWithFile.append("height", formData.height);
       formDataWithFile.append("insuranceNumber", formData.insuranceNumber);
 
@@ -129,17 +125,7 @@ const Profile = () => {
                 className="input"
               />
             </label>
-            <label>
-              Email Address
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address of the user"
-                value={formData.email}
-                onChange={handleChange}
-                className="input"
-              />
-            </label>
+
             <label>
               Phone Number
               <input
@@ -173,17 +159,7 @@ const Profile = () => {
                 className="input"
               />
             </label>
-            <label>
-              Emergency Contact Number
-              <input
-                type="tel"
-                name="emergencyContact"
-                placeholder="Provide your emergency contact number"
-                value={formData.emergencyContact}
-                onChange={handleChange}
-                className="input"
-              />
-            </label>
+     
 
             <label>
               Height
@@ -234,7 +210,7 @@ const Profile = () => {
             <label>
               ExpiryDate
               <input
-                type="date"
+                type="text"
                 name="expiryDate"
                 placeholder="Provide your insurance expiry date"
                 value={formData.expiryDate}
