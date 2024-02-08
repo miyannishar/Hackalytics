@@ -1,13 +1,14 @@
 import React from "react"
 import '../home.css';
 import ProfileImg from '../images/profile.jpeg';
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const RightProfileBar =(props) => {
     return             <div id="right">
     <div id="profile" className="card">
         <h2>Profile</h2>
         <div id="profile-info">
-            <img src={ProfileImg} alt="Profile photo"/>
+        <Link to = "/profile"><img src={ProfileImg} alt="Profile photo"/></Link>
             <p id="profile-name">{props.username}</p>
             <p id="profile-bio">A fitness enthusiast who loves to stay healthy and active.</p>
         </div>

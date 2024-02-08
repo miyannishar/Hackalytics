@@ -2,7 +2,6 @@ import "../home.css"; // Assuming that the CSS is in home.css in the same folder
 import React, { useState } from "react";
 import { Document, Page } from "react-pdf";
 import "./form.css";
-import ProfileImg from "../images/profile.jpeg";
 import NavBar from "../components/navbar";
 import RightProfileBar from "../components/RightProfileBar";
 import axios from "axios";

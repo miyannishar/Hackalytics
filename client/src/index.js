@@ -11,10 +11,11 @@ import './style.css'
 import Home from './views/home'
 import NotFound from './views/not-found'
 import Login from './login/login'
-//Testing Purpose
+//After Login
 import Upload from './DashBoard/Upload/upload'
 import Dashboard from './DashBoard/dashboard'
 import Hospital from './DashBoard/hospital'
+import Profile from './DashBoard/Profile/profile'
 // Testing Purpose
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
 
 
         <Route path="/upload" component={Upload} />
-
+        <Route path = "/profile" component ={Profile}/>
+ 
         // Testing Purpose
 
 
