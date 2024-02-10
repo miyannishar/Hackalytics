@@ -32,8 +32,8 @@ router.get("/get/alldata", checkIsUserAuthenticated, hospitalController.getAllHo
 router.post("/add/adddata", upload.single("thumbnail"),  checkIsUserAuthenticated, hospitalController.addHospitalData);
 router.get("/get/data/:id", checkIsUserAuthenticated, hospitalController.getSingleData);
 
-router.get("/get/profile", checkIsUserAuthenticated, profileController.getProfileData);
-router.post("/add/profile", checkIsUserAuthenticated, profileController.addProfileData);
+// router.get("/get/profile", checkIsUserAuthenticated, profileController.getProfileData);
+// router.post("/add/profile", checkIsUserAuthenticated, profileController.addProfileData);
 // router.get("/get/categories", checkIsUserAuthenticated, CategoryController.getAllCategories);
 // router.post("/add/category", checkIsUserAuthenticated, CategoryController.addNewCategory);
 
