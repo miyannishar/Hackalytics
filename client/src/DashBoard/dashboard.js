@@ -48,7 +48,7 @@ function Dashboard() {
       try {
         // Make GET request to backend API
         const response = await axios.get(
-          "http://localhost:5000/api/v1/get/getdata",
+          "https://evohealth.onrender.com/api/v1/get/getdata",
           {
             headers: {
               Authorization: `Bearer ${storedToken}`, // Use stored token directly

@@ -15,6 +15,7 @@ const checkIsUserAuthenticated = async (req, res, next) => {
             req.user = await authModel.findById(userID).select("--password")
             next();
         } catch (error) {
+            
             return res.status(400).json({message: "Unauthorized User"});
         }
     } else {

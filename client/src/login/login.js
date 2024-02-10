@@ -33,7 +33,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/user/login",
+        "https://evohealth.onrender.com/api/v1/user/login",
         logininput
       );
       alert(res.data.message);
@@ -52,7 +52,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/user/register",
+        "https://evohealth.onrender.com/api/v1/user/register",
         input
       );
       alert(res.data.message);

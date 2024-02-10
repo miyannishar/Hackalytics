@@ -20,7 +20,7 @@ function Hospital() {
 
         // Make GET request to backend API
         const response = await axios.get(
-          "http://localhost:5000/api/v1/get/alldata",
+          "https://evohealth.onrender.com/api/v1/get/alldata",
           {
             headers: {
               Authorization: `Bearer ${storedToken}`, // Use stored token directly
