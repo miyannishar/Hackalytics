@@ -8,7 +8,7 @@ const HomeHeader = () =>{
           data-thq="thq-navbar"
           className="navbarContainer home-navbar-interactive"
         >
-          <span className="logo">HEALTHDASH</span>
+          <span className="logo">EvoHealth</span>
           <div data-thq="thq-navbar-nav" className="home-desktop-menu">
             <nav className="home-links">
               <span className="home-nav12 bodySmall">About</span>
