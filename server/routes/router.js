@@ -5,7 +5,7 @@ import checkIsUserAuthenticated from "../middleware/authMiddleware.js";
 import multer from "multer";
 import healthController from "../controllers/healthController.js";
 import hospitalController from "../controllers/hospitalController.js";
-import profileController from "../controllers/profileController.js";
+// import profileController from "../controllers/profileController.js";
 //MULTER
 // SET STORAGE
 const storage = multer.diskStorage({
