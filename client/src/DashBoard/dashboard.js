@@ -9,6 +9,11 @@ import RightProfileBar from "./components/RightProfileBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Chart from "chart.js/auto";
+import {
+
+  TypingIndicator
+} from '@chatscope/chat-ui-kit-react';
+
 
 function Dashboard() {
   const [data, setData] = useState(null);
@@ -21,7 +26,17 @@ function Dashboard() {
   const [heartRateData, setHeartRateData] = useState([]);
   const [sleepDurationData, setSleepDurationData] = useState([]);
   const [bloodPressureData, setBloodPressureData] = useState([]);
-
+  const [response, setResponse] = useState("")
+  const API_KEY = "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"; 
+  const response_format = `Your health is below average today. Your blood pressure is high, and their heartbeat is slightly elevated. Nutrition levels are low, indicating potential dietary deficiencies. Your sleep cycle is below average, possibly affecting overall well-being. The calories burned are also lower than usual, suggesting a need for increased physical activity or dietary adjustments to improve health.
+  
+  In contrast, You enjoy above-average health today. Your blood pressure is normal, accompanied by a strong and steady heartbeat. Nutrition levels are high, reflecting a balanced and nourishing diet. Your sleep cycle is excellent, contributing to overall well-being. The calories burned are above average, indicating good metabolic activity and potential improvements in fitness.
+  
+  Today, Your health remains at an average level. Your blood pressure is slightly lower than usual, with a steady heartbeat. Nutrition levels and sleep cycle are both average, suggesting a need for consistent habits to maintain overall health. The calories burned are consistent with routine levels, indicating stable metabolic activity.
+  
+  Today marks your excellent state of health. Your blood pressure is optimal, and their heartbeat is strong and steady. Nutrition levels are very high, reflecting a well-rounded and nourishing diet. You enjoy a good sleep cycle, contributing to overall well-being. The calories burned are above average, indicating increased metabolic activity and potential improvements in fitness.
+  Your health parameters today mirror those of the first person, with below-average indicators. High blood pressure and an elevated heartbeat suggest potential cardiovascular strain. Nutrition levels are low, indicating ongoing dietary concerns, while the sleep cycle remains below average. The calories burned are also lower than usual, highlighting a need for lifestyle modifications to improve overall health and well-being.`;
+  
   // Inline CSS keyframes animation
   const glowAnimation = `
     @keyframes glow {
@@ -36,6 +51,55 @@ function Dashboard() {
       }
     }
   `;
+  const [isTyping, setIsTyping] = useState(false);
+
+  const [healthAnalysis, setHealthAnalysis] = useState('');
+
+  useEffect(() => {
+    // Fetch health analysis from OpenAI API
+    setIsTyping(true);
+
+    fetchHealthAnalysis();
+  }, []);
+  useEffect(() => {
+    if (healthAnalysis) {
+      setIsTyping(false);
+    }
+  }, [healthAnalysis]);
+  const apiRequestBody = {
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            role: "system",
+            content: `I am a health assistant. Your job is to motivate people rather than discouring people so only provide inspirational message. DO not include to harse comment. DO not include number. Present in a way people can easily understand. This are five different same output format you should be using. DO not include numbers ${response_format}. The is the data you should be using this data that is extracted from the user's smart watch.${response} .`
+        },
+    ]
+};
+  const fetchHealthAnalysis = async () => {
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + API_KEY,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(apiRequestBody)
+    });
+  
+      const data = await response.json();
+      console.log(data)
+      // Update the state with the first choice's text
+      if (data.choices && data.choices.length > 0) {
+        setHealthAnalysis(data.choices[0].message.content);
+      }
+  
+    } catch (error) {
+      console.error('Error fetching health analysis:', error.message);
+      setHealthAnalysis('Error fetching health analysis');
+      setIsTyping(false);
+
+    }
+  };
 
   useEffect(() => {
     // Retrieve token from localStorage
@@ -47,7 +111,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         // Make GET request to backend API
-        const response = await axios.get(
+        const response1 = await axios.get(
           "http://localhost:5000/api/v1/get/getdata",
           {
             headers: {
@@ -57,7 +121,14 @@ function Dashboard() {
         );
 
         // Set data state with the response data
-        setData(response.data);
+        if (response1.length > 4) {
+          // Update the response to include only the last 4 objects
+          setResponse(response1.slice(-4));
+        }
+        else{
+          setResponse(response1)
+        }
+        setData(response1.data);
         // console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -346,8 +417,7 @@ function Dashboard() {
         <div id="greeting" className="card">
           <h2>Your Health Analysis</h2>
           <p id="greeting-message">
-            This is your detailed health based on your personal health data.
-            This is predicted by AI.
+          {isTyping ? <TypingIndicator content="Please wait! MediGuide AI is analyzing your health data "/> : healthAnalysis}
           </p>
         </div>
         <div id="cards" className="card">

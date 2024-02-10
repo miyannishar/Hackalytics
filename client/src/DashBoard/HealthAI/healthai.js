@@ -12,11 +12,12 @@ import {
     TypingIndicator
 } from '@chatscope/chat-ui-kit-react';
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const HealthAI = () => {
+    const [responseapi, setResponseapi] = useState("");
     const [messages, setMessages] = useState([{
-            message: "Hello! This is Health-AI. What do you want to know about your health? ",
+            message: "Hello! This is MediGuide-AI. What do you want to know about your health? ",
             sentTime: "just now",
             sender: "Health-AI"
         },]);
@@ -58,6 +59,39 @@ const HealthAI = () => {
         }
     };
 
+    useEffect(() => {
+        // Retrieve token from localStorage
+        const storedToken = localStorage.getItem("token");
+        const fetchData = async () => {
+          try {
+            // Make GET request to backend API
+            const response1 = await axios.get(
+              "http://localhost:5000/api/v1/get/getdata",
+              {
+                headers: {
+                  Authorization: `Bearer ${storedToken}`, // Use stored token directly
+                },
+              }
+            );
+    
+            // Set data state with the response data
+            if (response1.length > 4) {
+              // Update the response to include only the last 4 objects
+              setResponseapi(response1.slice(-4));
+            }
+            else{
+                setResponseapi(response1)
+            }
+            setData(responseapi.data);
+            console.log(responseapi.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData(); // Call the fetchData function when the component mounts
+      }, []);
+
     async function processMessageToChatGPT(chatMessages) {
         const apiMessages = chatMessages.map((messageObject) => {
             const role = messageObject.sender === "Health-AI" ? "assistant" : "user";
@@ -69,7 +103,7 @@ const HealthAI = () => {
             "messages": [
                 {
                     role: "system",
-                    content: "I am a Health-AI. I am here to assist you with your health insights."
+                    content: `I am a Health-AI. I am here to assist you with your health insights. Use this data to give my health insights in 3 sentence. ${responseapi}`
                 },
                 ... apiMessages,
             ]
@@ -111,7 +145,7 @@ const HealthAI = () => {
                             <ChatContainer>
                                 <MessageList scrollBehavior="smooth"
                                     typingIndicator={
-                                        isTyping ? <TypingIndicator content="Health-AI is typing"/> : null
+                                        isTyping ? <TypingIndicator content="MediGuide is typing"/> : null
                                 }>
                                     {
                                     messages.map((message, i) => {
