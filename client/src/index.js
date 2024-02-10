@@ -16,6 +16,7 @@ import Upload from './DashBoard/Upload/upload'
 import Dashboard from './DashBoard/dashboard'
 import Hospital from './DashBoard/hospital'
 import Profile from './DashBoard/Profile/profile'
+import HealthAI from './DashBoard/HealthAI/healthai'
 // Testing Purpose
 const App = () => {
   return (
@@ -29,6 +30,8 @@ const App = () => {
 
         <Route path="/upload" component={Upload} />
         <Route path = "/profile" component ={Profile}/>
+        <Route path = "/health-ai" component ={HealthAI}/>
+
  
         // Testing Purpose
 
