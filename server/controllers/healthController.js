@@ -28,10 +28,10 @@ class healthController {
             caloriesBurned: Math.floor(Math.random() * (500 - 100 + 1)) + 100,
           },
           sleep: {
-            duration: Math.floor(Math.random() * (480 - 240 + 1)) + 240,
+            duration: Math.floor(Math.random() * (14 - 0 + 1)) + 0,
             patterns: {
-              deepSleep: Math.floor(Math.random() * (180 - 60 + 1)) + 60,
-              remSleep: Math.floor(Math.random() * (180 - 60 + 1)) + 60,
+              deepSleep: Math.floor(Math.random() * (3 - 5 + 1)) + 5,
+              remSleep: Math.floor(Math.random() * (3 - 5 + 1)) + 5,
             },
           },
           environment: {

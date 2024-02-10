@@ -111,8 +111,8 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         // Make GET request to backend API
-        const response1 = await axios.get(
-          "http://localhost:5000/api/v1/get/getdata",
+        const response = await axios.get(
+          "https://evohealth.onrender.com/api/v1/get/getdata",
           {
             headers: {
               Authorization: `Bearer ${storedToken}`, // Use stored token directly

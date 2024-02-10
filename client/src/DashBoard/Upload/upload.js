@@ -62,7 +62,7 @@ const Upload = () => {
       formDataWithFile.append("thumbnail", file);
 
       const res = await axios.post(
-        "http://localhost:5000/api/v1/add/adddata",
+        "https://evohealth.onrender.com/api/v1/add/adddata",
         formDataWithFile,
         {
           headers: {
